@@ -1,6 +1,6 @@
 <?php
 
-namespace BeyondCode\Comments\Traits;
+namespace BenjaminTemitope\Comments\Traits;
 
 
 trait CanComment

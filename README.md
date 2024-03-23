@@ -138,6 +138,43 @@ $comments = $post->comments;
 $approved = $post->comments()->approved()->get();
 
 ```
+### Nested Comments
+
+You can respond to a comment by using either the comment's ID or the model instance.
+
+Using a comment's ID:
+
+```php
+
+$post->comment("This is a comment", 1);
+
+// comment on behalf of a user
+$post->commentAsUser($yourUser, 'This is a comment from someone else.', 1);
+
+```
+
+Using the model instance:
+
+```php
+
+$post->comment("This is a comment", $commentModel);
+
+// comment on behalf of a user
+$post->commentAsUser($yourUser, 'This is a comment from someone else.', $commentModel);
+
+```
+
+### Retrieving Nested Comments
+
+```php
+
+// Retrieve all comments with replies
+$comments = $post->comments()->with('replies')->get();
+
+// or
+$comments = $post->comments()->with('children')->get();
+
+```
 
 ### Testing
 

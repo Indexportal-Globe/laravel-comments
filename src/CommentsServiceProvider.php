@@ -1,6 +1,6 @@
 <?php
 
-namespace BeyondCode\Comments;
+namespace BenjaminTemitope\Comments;
 
 use Illuminate\Support\ServiceProvider;
 

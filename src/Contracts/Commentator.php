@@ -1,6 +1,6 @@
 <?php
 
-namespace BeyondCode\Comments\Contracts;
+namespace BenjaminTemitope\Comments\Contracts;
 
 
 interface Commentator

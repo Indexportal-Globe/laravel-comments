@@ -1,5 +1,5 @@
 {
-    "name": "beyondcode/laravel-comments",
+    "name": "benjamintemitope/laravel-comments",
     "description": "Add comments to your Laravel application",
     "keywords": [
         "beyondcode",
@@ -26,12 +26,12 @@
     },
     "autoload": {
         "psr-4": {
-            "BeyondCode\\Comments\\": "src"
+            "BenjaminTemitope\\Comments\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "BeyondCode\\Comments\\Tests\\": "tests"
+            "BenjaminTemitope\\Comments\\Tests\\": "tests"
         }
     },
     "scripts": {
@@ -44,7 +44,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "BeyondCode\\Comments\\CommentsServiceProvider"
+                "BenjaminTemitope\\Comments\\CommentsServiceProvider"
             ]
         }
     }

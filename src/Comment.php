@@ -6,6 +6,7 @@ use App\Models\Filters\CommentStatusSelectFilter;
 use BenjaminTemitope\Comments\Contracts\Commentator;
 use BenjaminTemitope\Comments\Traits\HasComments;
 use Exception;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Lacodix\LaravelModelFilter\Traits\HasFilters;
 
@@ -52,16 +53,21 @@ class Comment extends Model
         return $this->belongsTo($this->getAuthModelName(), 'user_id');
     }
 
-    public function parent() {
+    public function parent() 
+    {
         return $this->belongsTo(config('comments.comment_class'), 'parent_id');
     }
 
-    public function children() {
+    public function children() 
+    {
         return $this->hasMany(config('comments.comment_class'), 'parent_id');
     }
 
-    public function getRepliesAttribute(){
-        return $this->children;
+    public function replies(): Attribute
+    {
+        return Attribute::make(
+            get: fn() => $this->children
+        );
     }
 
     public function approve()
@@ -82,11 +88,13 @@ class Comment extends Model
         return $this;
     }
 
-    public function reply(string $comment){
+    public function reply(string $comment)
+    {
         return $this->replyAsUser(auth()->user(), $comment);
     }
 
-    public function replyAsUser(?Model $user, string $comment){
+    public function replyAsUser(?Model $user, string $comment)
+    {
         $commentClass = config('comments.comment_class');
 
         $reply = new $commentClass([
@@ -103,7 +111,18 @@ class Comment extends Model
         return $this->children()->save($reply);
     }
 
-    public function hasReplies() :bool {
+    public function isApproved(): bool
+    {
+        return ($this->is_approved);
+    }
+
+    public function isReply(): bool
+    {
+        return (!empty($this->parent_id));
+    }
+
+    public function hasReplies() :bool 
+    {
         return ($this->children()->count());
     }
 
